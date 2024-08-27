@@ -1,6 +1,6 @@
 const express = require('express');
 
-const configHandleBars = require('./config/handlebarsConfig');
+const configHandleBars = require('./config/configHandlebars');
 const configExpress = require('./config/configExpress');
 const routes = require('./routes');
 
