@@ -1,0 +1,18 @@
+{
+  "name": "movie-magic-september-2024",
+  "version": "1.0.0",
+  "description": "JS BackEnd Workshop @SoftUni",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
