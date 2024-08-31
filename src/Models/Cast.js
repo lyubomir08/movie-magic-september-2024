@@ -22,6 +22,12 @@ const castSchema = new mongoose.Schema({
     castImage: {
         type: String,
         required: true,
+        validate: {
+            validator(value) {
+                return /^https?:\/\//.test(value)
+            },
+            message: (props) => `${props.value} is invalid url for the castImage!`
+        }
     },
 
 });

@@ -33,8 +33,17 @@ router.get('/movies/:movieId', async (req, res) => {
 router.get('/movies/:movieId/attach', async (req, res) => {
     const movie = await movieService.getOne(req.params.movieId).lean();
     const casts = await castService.getAll().lean();
+
     // TODO: Remove already added casts
     res.render('movie/attach', { ...movie, casts });
+});
+
+router.post('/movies/:movieId/attach', async (req, res) => {
+    const castId = req.body.cast;
+
+    await movieService.attach(req.params.movieId, castId);
+
+    res.redirect(`/movies/${req.params.movieId}/attach`);
 });
 
 module.exports = router;
