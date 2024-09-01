@@ -30,6 +30,4 @@ exports.getOne = (movieId) => Movie.findById(movieId).populate('casts');
 
 exports.create = (movieData) => Movie.create(movieData);
 
-exports.attach = (movieId, castId) => {
-    return Movie.findByIdAndUpdate(movieId, { $push: { casts: castId } });
-};
+exports.attach = (movieId, castId) => Movie.findByIdAndUpdate(movieId, { $push: { casts: castId } });
