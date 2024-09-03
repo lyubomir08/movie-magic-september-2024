@@ -9,7 +9,7 @@ function sign(payload, secretOrPrivateKey, options = {}) {
             }
 
             resolve(token);
-        });
+        })
     });
 
     return promise;
@@ -19,5 +19,5 @@ const verify = util.promisify(jwt.verify);
 
 module.exports = {
     sign,
-    verify
-}
+    verify,
+};

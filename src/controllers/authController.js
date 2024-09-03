@@ -1,17 +1,25 @@
 const router = require('express').Router();
 
+const User = require('../models/User');
 const authService = require('../services/authService');
+const { getErrorMessage, validate } = require('../utils/errorUtils');
 
 router.get('/register', (req, res) => {
     res.render('auth/register');
 });
 
-router.post('/register', async (req, res) => {
-    const userData =  req.body;
+router.post('/register', validate(User), async (req, res) => {
+    const userData = req.body;
 
-    await authService.register(userData);
+    try {
+        await authService.register(userData);
 
-    res.redirect('/auth/login');
+        res.redirect('/auth/login');
+    } catch (err) {
+        const message = getErrorMessage(err);
+
+        res.render('auth/register', { ...userData, error: message });
+    }
 });
 
 router.get('/login', (req, res) => {
@@ -21,10 +29,22 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    const token = await authService.login(email, password);
+    try {
+        const token = await authService.login(email, password);
 
-    res.cookie('auth', token);  
-    
+        res.cookie('auth', token);
+
+        res.redirect('/');
+    } catch (err) {
+        const message = getErrorMessage(err);
+
+        res.status(400).render('auth/login', { error: message });
+    }
+});
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('auth');
+
     res.redirect('/');
 });
 
