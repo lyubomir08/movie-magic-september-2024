@@ -3,7 +3,6 @@ const Cast = require('../models/Cast');
 
 exports.getAll = () => Movie.find();
 
-// TODO: Filter result in mongoDB
 exports.search = (title, genre, year) => {
     let query = {};
 
